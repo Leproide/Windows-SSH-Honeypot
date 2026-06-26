@@ -110,7 +110,7 @@ IPTHREAT_COUNT = max(1, min(10, int(os.environ.get("HP_IPTHREAT_COUNT", "3"))))
 # Notes must not contain usernames/PII/timestamps per IPThreat guidelines.
 IPTHREAT_NOTES = os.environ.get(
     "HP_IPTHREAT_NOTES",
-    "Unsolicited connection to an SSH honeypot port (no real service exposed).")
+    "SSH honeypot port (no real service exposed)")
 
 # Never ban these (CIDR allowed). Loopback is always whitelisted.
 WHITELIST = [
