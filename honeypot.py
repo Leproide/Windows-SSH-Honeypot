@@ -105,6 +105,8 @@ IPTHREAT_URL = "https://api.ipthreat.net/api/report"
 # Flags: comma-separated names or a bitwise-OR integer. BruteForce(8)+PortScan(4096).
 IPTHREAT_FLAGS = os.environ.get("HP_IPTHREAT_FLAGS", "BruteForce,PortScan")
 IPTHREAT_SYSTEM = os.environ.get("HP_IPTHREAT_SYSTEM", "SSH")   # 32 char max
+# Aggregated attack count reported per IP. IPThreat accepts 1-10 (clamped).
+IPTHREAT_COUNT = max(1, min(10, int(os.environ.get("HP_IPTHREAT_COUNT", "3"))))
 # Notes must not contain usernames/PII/timestamps per IPThreat guidelines.
 IPTHREAT_NOTES = os.environ.get(
     "HP_IPTHREAT_NOTES",
@@ -338,7 +340,7 @@ def report_ipthreat(ip):
         "system": IPTHREAT_SYSTEM[:32],         # e.g. "SSH"
         "notes": IPTHREAT_NOTES[:1000],         # no PII / usernames / timestamps
         "ts": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "count": 1,
+        "count": IPTHREAT_COUNT,
     }).encode()
     req = urllib.request.Request(
         IPTHREAT_URL, data=body, method="POST",

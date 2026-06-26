@@ -79,6 +79,7 @@ All parameters are environment variables (defaults shown):
 | `HP_IPTHREAT`        | auto                                      | Force-enable/disable IPThreat reporting            |
 | `HP_IPTHREAT_FLAGS`  | `BruteForce,PortScan`                     | IPThreat flags (names CSV or bitwise-OR int)       |
 | `HP_IPTHREAT_SYSTEM` | `SSH`                                     | Attacked-system label (≤32 chars)                  |
+| `HP_IPTHREAT_COUNT`  | `3`                                       | Reported attack count per IP (1-10)                |
 | `HP_IPTHREAT_NOTES`  | *(generic)*                               | Report note (no PII/usernames/timestamps)          |
 | `HP_TG_TOKEN`        | *(empty)*                                 | Telegram bot token                                 |
 | `HP_TG_CHAT`         | *(empty)*                                 | Telegram chat ID                                   |
