@@ -345,6 +345,8 @@ def report_ipthreat(ip):
         headers={
             "Content-Type": "application/json",
             "Accept": "application/json",
+            # Default urllib UA ("Python-urllib/x") is often WAF-blocked (403).
+            "User-Agent": "WindowsSSHHoneypot/1.0 (+https://github.com/Leproide)",
             "X-API-KEY": IPTHREAT_KEY,
         },
     )
@@ -353,7 +355,14 @@ def report_ipthreat(ip):
             r.read()
             return 200 <= r.status < 300
     except urllib.error.HTTPError as e:
-        log.error("IPThreat report %s failed: HTTP %s %s", ip, e.code, e.reason)
+        # The response body carries IPThreat's reason (e.g. allowlisted IP, quota).
+        detail = ""
+        try:
+            detail = e.read().decode("utf-8", "replace").strip()[:300]
+        except Exception:
+            pass
+        log.error("IPThreat report %s rejected: HTTP %s %s%s", ip, e.code, e.reason,
+                  f" - {detail}" if detail else "")
     except Exception as e:
         log.error("IPThreat report %s failed: %s", ip, e)
     return False
@@ -631,6 +640,10 @@ def main():
              f"{ADMIN_HOST}:{ADMIN_PORT}" if ADMIN_ENABLED else "off",
              "on" if (IPTHREAT_ENABLED and IPTHREAT_KEY) else "off",
              "on" if (TELEGRAM_TOKEN and TELEGRAM_CHAT_ID) else "off")
+    if IPTHREAT_ENABLED and IPTHREAT_KEY:
+        # Masked fingerprint: confirms the key reached Python intact (no shell mangling).
+        log.info("IPThreat key loaded: length=%d, starts=%s..., ends=...%s",
+                 len(IPTHREAT_KEY), IPTHREAT_KEY[:4], IPTHREAT_KEY[-4:])
 
     threading.Thread(target=flush_loop, daemon=True).start()
     start_admin()
