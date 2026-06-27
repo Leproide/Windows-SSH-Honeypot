@@ -26,6 +26,8 @@ so each source is treated as a port-scan / brute-force attempt and blocked syste
 - **Local admin HTTP API** (127.0.0.1 only) to list/unban, plus a prompt-based `unban.bat`.
 - Standard library only — no third-party Python packages.
 
+  <img width="1254" height="1254" alt="ChatGPT Image 27 giu 2026, 16_12_49" src="https://github.com/user-attachments/assets/b479f0d7-7553-46b9-814d-b12d50aa193e" />
+
 ## How it works
 
 1. Listens on the configured port(s) and sends a believable `SSH-2.0-OpenSSH_...` banner.
