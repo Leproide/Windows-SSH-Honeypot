@@ -4,6 +4,9 @@
 ![Platform](https://img.shields.io/badge/platform-Windows-0078D6)
 ![Python](https://img.shields.io/badge/python-3.8%2B-3776AB)
 
+
+  <img width="1254" height="1254" alt="ChatGPT Image 27 giu 2026, 16_12_49" src="https://github.com/user-attachments/assets/b479f0d7-7553-46b9-814d-b12d50aa193e" />
+
 A single-file Windows honeypot that exposes a port (default **22**) impersonating an SSH
 service. Every connecting IP is banned into a **single Windows Firewall rule per direction**,
 with **debounced** updates, a **bounded FIFO cap** to keep the rule small, optional reporting
@@ -25,8 +28,6 @@ so each source is treated as a port-scan / brute-force attempt and blocked syste
 - **Telegram** batch alerts (new bans + evictions per flush).
 - **Local admin HTTP API** (127.0.0.1 only) to list/unban, plus a prompt-based `unban.bat`.
 - Standard library only — no third-party Python packages.
-
-  <img width="1254" height="1254" alt="ChatGPT Image 27 giu 2026, 16_12_49" src="https://github.com/user-attachments/assets/b479f0d7-7553-46b9-814d-b12d50aa193e" />
 
 ## How it works
 
