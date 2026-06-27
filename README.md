@@ -7,6 +7,7 @@
 
   <img width="1254" height="1254" alt="ChatGPT Image 27 giu 2026, 16_12_49" src="https://github.com/user-attachments/assets/b479f0d7-7553-46b9-814d-b12d50aa193e" />
 
+
 A single-file Windows honeypot that exposes a port (default **22**) impersonating an SSH
 service. Every connecting IP is banned into a **single Windows Firewall rule per direction**,
 with **debounced** updates, a **bounded FIFO cap** to keep the rule small, optional reporting
